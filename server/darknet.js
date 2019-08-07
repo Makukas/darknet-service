@@ -69,5 +69,8 @@ module.exports = {
   ]),
   'yolo-tiny': spawn('yolo-tiny', './darknet', [
     'detector', 'test', 'cfg/voc.data', 'cfg/yolov3-tiny.cfg', '/yolov3-tiny.weights'
+  ]),
+  'yolo-bellmark': spawn('yolo-bellmark', './darknet', [
+    'detector', 'test', 'cfg/Bellmark.data', 'cfg/Bellmark.cfg', '/Bellmark_best.weights'
   ])
 }

@@ -24,6 +24,15 @@ app.post('/yolo-tiny', upload.single('photo'), function (req, res, next) {
   })
 })
 
+app.post('/yolo-bellmark', upload.single('photo'), function (req, res, next) {
+  var filename = `./${req.file.destination}${req.file.filename}`
+  console.log(`-- yolo-bellmark received --: ${filename}`)
+  darknet['yolo-bellmark'](filename, function (data) {
+    res.json(data)
+    fs.unlink(filename, d => {})
+  })
+})
+
 app.listen(3000, function () {
   console.log('darknet app listening on port :3000')
 })
