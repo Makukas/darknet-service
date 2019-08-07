@@ -18,7 +18,7 @@ RUN make
 RUN curl -L -o /darknet/cfg/Bellmark.cfg https://www.dropbox.com/s/sxcwrme96kiowh4/Bellmark.cfg?dl=1
 RUN curl -L -o /darknet/cfg/Bellmark.data https://www.dropbox.com/s/6aj13reckbrs0q3/Bellmark.data?dl=1
 RUN curl -L -o /darknet/cfg/Bellmark.names https://www.dropbox.com/s/8kankt6o2fdvic0/Bellmark.names?dl=1
-RUN curl -L -o /darknet/cfg/Bellmark_best.weights https://www.dropbox.com/s/cmb2l6azyegchm5/Bellmark_best.weights?dl=1
+RUN curl -L -o /Bellmark_best.weights https://www.dropbox.com/s/cmb2l6azyegchm5/Bellmark_best.weights?dl=1
 
 # install node and use the lts version
 RUN curl -L https://git.io/n-install | bash -s -- -y lts
