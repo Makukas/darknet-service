@@ -65,6 +65,6 @@ function spawn(name, cmd, args) {
 
 module.exports = {
   'yolo': spawn('yolo', './darknet', [
-    'detector', 'test', './obj.data', './prekes.cfg', './prekes_last.weights', '-dont_show', '-ext_output'
+    'detector', 'test', './obj.data', './prekes.cfg', './prekes_9000.weights', '-dont_show', '-ext_output'
   ])
 }
