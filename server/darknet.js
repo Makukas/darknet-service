@@ -47,6 +47,7 @@ function spawn (name, cmd, args) {
   function run () {
     // active waiting for new files to work on
     if (yoloReady) {
+      console.log("yolo ready")
       var todo = waitingQueue.pop()
       if (!todo) { return setTimeout(run, 1000) }
       console.log(`-- ${name} processing --: ${todo.filename}`)
@@ -65,6 +66,6 @@ function spawn (name, cmd, args) {
 
 module.exports = {
   'yolo': spawn('yolo', './darknet', [
-    'detector', 'test', './cfg/coco.data', './cfg/yolov4.cfg', './yolov4.weights'
+    'detector', 'test', './obj.data', './prekes.cfg', './prekes_9000.weights'
   ])
 }
