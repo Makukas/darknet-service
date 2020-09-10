@@ -1,30 +1,30 @@
 var cp = require('child_process')
+var fs = require('fs');
 
-function spawn (name, cmd, args) {
+function spawn(name, cmd, args) {
   var waitingQueue = []
   var working = {}
   var yoloReady = false
 
   var yolo = cp.spawn(cmd, args)
-
+  var filename = null
   yolo.stdout.on('data', (data) => {
+
+    if (data.toString().includes("./uploads/")) {
+      filename = data.toString().split(':')[0]
+    }
     var lines = data.toString().split('\n')
-    var filename = null
+
     for (var i = 0; i < lines.length; i++) {
       data = lines[i]
-      if (data.includes('filename')) {
-        // data line update the file data list
-        data = JSON.parse(data)
-        filename = data.filename
-        delete data.filename
+      if (data.includes("%")) {
         working[filename].data.push(data)
-      } else if (data.includes('detection done')) {
-        // detection just finished
-        filename = data.split(':')[1]
-        working[filename].callback(
-          working[filename].data
-        )
       } else if (data.includes('Enter Image Path')) {
+        if (working[filename] !== undefined && working[filename].data != undefined && working[filename].data.length !== 0) {
+          working[filename].callback(
+            working[filename].data
+          )
+        }
         // ready to start working again
         yoloReady = true
         console.log(`-- ${name} detector ready --`)
@@ -36,7 +36,7 @@ function spawn (name, cmd, args) {
     console.log(`-- ${name} detector exited --`)
   })
 
-  function detect (filename, callback) {
+  function detect(filename, callback) {
     // add the file and queue it for processing
     waitingQueue.unshift({
       filename: filename,
@@ -44,10 +44,9 @@ function spawn (name, cmd, args) {
     })
   }
 
-  function run () {
+  function run() {
     // active waiting for new files to work on
     if (yoloReady) {
-      console.log("yolo ready")
       var todo = waitingQueue.pop()
       if (!todo) { return setTimeout(run, 1000) }
       console.log(`-- ${name} processing --: ${todo.filename}`)
@@ -66,6 +65,6 @@ function spawn (name, cmd, args) {
 
 module.exports = {
   'yolo': spawn('yolo', './darknet', [
-    'detector', 'test', './obj.data', './prekes.cfg', './prekes_9000.weights'
+    'detector', 'test', './obj.data', './prekes.cfg', './prekes_last.weights', '-dont_show', '-ext_output'
   ])
 }
