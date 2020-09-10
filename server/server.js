@@ -9,14 +9,15 @@ var app = express()
 app.post('/yolo', upload.single('photo'), function (req, res, next) {
   var filename = `./${req.file.destination}${req.file.filename}`
   console.log(`-- yolo received --: ${filename}`)
-  darknet.yolo(filename, function (data) {
-    res.json(data)
-    fs.unlink(filename, d => {})
+  darknet.yolo(filename, data => {
+    res.send(data)
+    fs.unlink(filename, d => { })
   })
+
 })
 
 app.get('/status', function (req, res, next) {
-  res.send({message: "darknet is live"});
+  res.send({ message: "darknet is live" });
   return;
 })
 
