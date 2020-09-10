@@ -65,12 +65,6 @@ function spawn (name, cmd, args) {
 
 module.exports = {
   'yolo': spawn('yolo', './darknet', [
-    'detector', 'test', 'cfg/coco.data', 'cfg/yolov3.cfg', '/yolov3.weights'
-  ]),
-  'yolo-tiny': spawn('yolo-tiny', './darknet', [
-    'detector', 'test', 'cfg/voc.data', 'cfg/yolov3-tiny.cfg', '/yolov3-tiny.weights'
-  ]),
-  'yolo-bellmark': spawn('yolo-bellmark', './darknet', [
-    'detector', 'test', 'cfg/Bellmark.data', 'cfg/Bellmark.cfg', '/Bellmark_best.weights'
+    'detector', 'test', '/obj.data', '/prekes.cfg', '/prekes_9000.weights'
   ])
 }
