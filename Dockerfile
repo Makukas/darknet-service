@@ -11,7 +11,6 @@ RUN curl -L -o obj.data https://www.dropbox.com/s/76rrxbr54872y75/obj.data?dl=1
 
 RUN git clone https://github.com/AlexeyAB/darknet.git
 WORKDIR /darknet
-RUN sed -i 's/OPENCV=0/OPENCV=1/' Makefile
 RUN sed -i 's/GPU=0/GPU=1/' Makefile
 RUN sed -i 's/CUDNN=0/CUDNN=1/' Makefile
 RUN make
