@@ -9,9 +9,11 @@ RUN curl -L -o prekes_9000.weights https://www.dropbox.com/s/s46mef78c0vnbx9/pre
 RUN curl -L -o prekes.cfg https://www.dropbox.com/s/ayq8l85gjx3xdyz/prekes.cfg?dl=1
 RUN curl -L -o obj.data https://www.dropbox.com/s/76rrxbr54872y75/obj.data?dl=1
 
-RUN git clone https://github.com/rowellpica/darknet
+RUN git clone https://github.com/AlexeyAB/darknet.git
 WORKDIR /darknet
-RUN git checkout darknet-service
+RUN sed -i 's/OPENCV=0/OPENCV=1/' Makefile
+RUN sed -i 's/GPU=0/GPU=1/' Makefile
+RUN sed -i 's/CUDNN=0/CUDNN=1/' Makefile
 RUN make
 
 # install node and use the lts version
